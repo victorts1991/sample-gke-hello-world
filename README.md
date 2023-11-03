@@ -5,80 +5,89 @@ I had the freedom to run this project on GKE and so the steps below for executio
 
 Below is the link to my course completion certificate:
 
-[https://cursos.alura.com.br/user/victorts1991/course/kubernetes-pods-services-configmap/certificate](Certificate Link)
+[Certificate Link](https://cursos.alura.com.br/user/victorts1991/course/kubernetes-pods-services-configmap/certificate)
 
 ## How to Run
 
-Copie e cole as pastas listadas abaixo na raiz do seu Cluster do GKE:
+1. Copy and paste the folders listed below into the root of your GKE Cluster:
+```sh
 - db
 - sistema
+```
 
-No CLI do seu Cluster do GKE execute os comandos em sequência:
-
-
-# Criando e expondo o Pod do banco de dados
+2. In the CLI of your GKE Cluster, execute the commands in sequence:
+```sh
+# Creating and exposing the database Pod
 cd db
 
-# Criando o ConfigMap
+# Creating the ConfigMap
 kubectl apply -f db-configmap.yaml
 
-# Criando o Pod
+# Creating the Pod
 kubectl apply -f db-noticias.yaml
 
-# Criando o Service de Load Balancer
+# Creating the Load Balancer Service
 kubectl apply -f svc-db-noticias.yaml
 
-# Criando e expondo o Pod de Sistema
+# Creating and exposing the Sistema Pod
 cd ../sistema
 
-# Criando o ConfigMap
+# Creating the ConfigMap
 kubectl apply -f sistema-configmap.yaml
 
-# Criando o Pod
+# Creating the Pod
 kubectl apply -f sistema-noticias.yaml
 
-# Criando o Service de Load Balancer
+# Creating the Load Balancer Service
 kubectl apply -f svc-sistema-noticias.yaml
+```
 
-No menu Services & Ingress, copie o IP da coluna Endpoints do service svc-sistema-noticias
+3. In the Services & Ingress menu, copy the IP from the Endpoints column of the svc-sistema-noticias
 
-Cole o IP copiado anteriormente no arquivo portal/portal-configmap.yaml no valor do parâmetro IP_SISTEMA, o código deverá ficar semelhante ao abaixo:
-
+4. Paste the previously copied IP into the file portal/portal-configmap.yaml in the parameter value IP_SISTEMA, the code should look similar to the one below:
+```sh
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: portal-configmap
 data:
   IP_SISTEMA: http://35.223.47.76
+```
 
 Obs: 
-    - O prefixo do IP deverá ser http:// e não https://;
-    - Cuidado ao copiar o IP com uma barra no final deixando assim 35.223.47.76/, está barra no final fará com que o portal não consiga acessar a API do sistema: 
+  - The IP prefix must be http:// and not https://;
+  - Be careful when copying the IP with a slash at the end, leaving 35.223.47.76/, this slash at the end will result in the portal not being able to access the sistema-noticias pod API:
 
-Copie e cole a pasta portal na raiz do seu Cluster do GKE:
+5. Copy and paste the portal folder into the root of your GKE Cluster;
 
-No CLI do seu Cluster do GKE execute os comandos em sequência:
-
-# Criando e expondo o Pod do banco de dados
+6. In the CLI of your GKE Cluster, execute the commands in sequence:
+```sh
+# Creating and exposing the Portal Pod
 cd portal
 
-# Criando o ConfigMap
+# Creating the ConfigMap
 kubectl apply -f portal-configmap.yaml
 
-# Criando o Pod
+# Creating the Pod
 kubectl apply -f portal-noticias.yaml
 
-# Criando o Service de Load Balancer
+# Creating the Load Balancer Service
 kubectl apply -f svc-portal-noticias.yaml
+```
 
-Após todos os Pods e Services estarem sendo executados, execute os seguintes passos para testar:
+## How to Access
 
-1. No menu Services & Ingress, clique no IP da coluna Endpoints do service svc-sistema-noticias;
-2. Coloque os dados de acesso abaixo para acessar:
-    - Username: admin
-    - Password: admin
-3. Clique no botão azul "Nova Notícia";
-4. Cadastre uma notícia no formulário dentro do modal que aparecer;
-5. De volta ao GCP, no menu Services & Ingress, clique no IP da coluna Endpoints do service svc-portal-noticias;
-6. Será aberto uma página exibindo a notícia que você cadastrou anteriormente;
+After all Pods and Services are running, perform the following steps to test:
+
+1. In the GKE Services & Ingress menu, click on the IP in the Endpoints column of the svc-sistema-noticias service;
+2. Enter the access data below to access:
+```sh
+- Username: admin
+- Password: admin
+```
+
+3. Click on the blue "Nova Notícia" button;
+4. Register a news item in the form within the modal that appears;
+5. Back in GKE, in the Services & Ingress menu, click on the IP in the Endpoints column of the svc-portal-noticias;
+6. A page will open displaying the news you previously registered;
 
