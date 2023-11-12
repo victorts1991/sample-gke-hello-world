@@ -8,6 +8,13 @@ spec:
   containers:
     - name: db-noticias-container
       image: aluracursos/mysql-db:1
+      resources:
+        limits:
+          cpu: "0.3"
+          memory: "512Mi"          
+        requests:
+          cpu: "0.3"
+          memory: "512Mi"
       ports:
         - containerPort: 3306
       envFrom:

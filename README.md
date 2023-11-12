@@ -1,6 +1,6 @@
 # sample-gke-hello-world
 
-This is a project done during classes in the course "KUBERNETES: PODS, SERVICES E CONFIGMAPS" at Alura school,
+This is a project done during classes in the courses "KUBERNETES: PODS, SERVICES E CONFIGMAPS" and "KUBERNETES: DEPLOYMENTS, VOLUMES E ESCALABILIDADE" at Alura school.
 I had the freedom to run this project on GKE and so the steps below for execution were written based on the GKE structure.
 
 Below is the link to my course completion certificate:
@@ -23,8 +23,8 @@ cd db
 # Creating the ConfigMap
 kubectl apply -f db-configmap.yaml
 
-# Creating the Pod
-kubectl apply -f db-noticias.yaml
+# Creating the Deployment
+kubectl apply -f db-noticias-deployment.yaml
 
 # Creating the Load Balancer Service
 kubectl apply -f svc-db-noticias.yaml
@@ -35,8 +35,8 @@ cd ../sistema
 # Creating the ConfigMap
 kubectl apply -f sistema-configmap.yaml
 
-# Creating the Pod
-kubectl apply -f sistema-noticias.yaml
+# Creating the Deployment
+kubectl apply -f sistema-noticias-deployment.yaml
 
 # Creating the Load Balancer Service
 kubectl apply -f svc-sistema-noticias.yaml
@@ -68,8 +68,8 @@ cd portal
 # Creating the ConfigMap
 kubectl apply -f portal-configmap.yaml
 
-# Creating the Pod
-kubectl apply -f portal-noticias.yaml
+# Creating the Deployment
+kubectl apply -f portal-noticias-deployment.yaml
 
 # Creating the Load Balancer Service
 kubectl apply -f svc-portal-noticias.yaml
