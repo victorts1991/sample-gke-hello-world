@@ -17,7 +17,7 @@ Below is the link to my course completion certificate:
 
 2. In the CLI of your GKE Cluster, execute the commands in sequence:
 ```sh
-# Creating and exposing the database Pod
+# Creating and exposing the database Deployment
 cd db
 
 # Creating the ConfigMap
@@ -29,14 +29,20 @@ kubectl apply -f db-noticias-deployment.yaml
 # Creating the Load Balancer Service
 kubectl apply -f svc-db-noticias.yaml
 
-# Creating and exposing the Sistema Pod
+# Creating and exposing the Sistema StatefulSet
 cd ../sistema
 
 # Creating the ConfigMap
 kubectl apply -f sistema-configmap.yaml
 
-# Creating the Deployment
-kubectl apply -f sistema-noticias-deployment.yaml
+# Creating the PersistenceVolumeClaim at images
+kubectl apply -f imagens-pvc.yaml
+
+# Creating the PersistenceVolumeClaim at session
+kubectl apply -f sessao-pvc.yaml
+
+# Creating the StatefulSet
+kubectl apply -f sistema-noticias-statefulset.yaml
 
 # Creating the Load Balancer Service
 kubectl apply -f svc-sistema-noticias.yaml
