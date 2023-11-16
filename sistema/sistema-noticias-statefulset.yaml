@@ -39,6 +39,20 @@ spec:
                   - |
                     chmod -R 777 /tmp
                     chmod -R 777 /var/www/html/uploads
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 3
+            initialDelaySeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /inserir_noticias.php
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 5
+            initialDelaySeconds: 3
       volumes:
         - name: imagens
           persistentVolumeClaim:
