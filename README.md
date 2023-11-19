@@ -5,9 +5,9 @@ I had the freedom to run this project on GKE and so the steps below for executio
 
 Below are the links to my course completion certificates:
 
-[Certificate Link](https://cursos.alura.com.br/user/victorts1991/course/kubernetes-pods-services-configmap/certificate)
+[Certificate Link: KUBERNETES: PODS, SERVICES E CONFIGMAPS](https://cursos.alura.com.br/user/victorts1991/course/kubernetes-pods-services-configmap/certificate)
 
-[Certificate Link](https://cursos.alura.com.br/user/victorts1991/course/kubernetes-deployments-volumes-escalabilidade/certificate)
+[Certificate Link: KUBERNETES: DEPLOYMENTS, VOLUMES E ESCALABILIDADE](https://cursos.alura.com.br/user/victorts1991/course/kubernetes-deployments-volumes-escalabilidade/certificate)
 
 ## How to Run
 
