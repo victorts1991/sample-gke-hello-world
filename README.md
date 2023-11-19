@@ -3,9 +3,11 @@
 This is a project done during classes in the courses "KUBERNETES: PODS, SERVICES E CONFIGMAPS" and "KUBERNETES: DEPLOYMENTS, VOLUMES E ESCALABILIDADE" at Alura school.
 I had the freedom to run this project on GKE and so the steps below for execution were written based on the GKE structure.
 
-Below is the link to my course completion certificate:
+Below are the links to my course completion certificates:
 
 [Certificate Link](https://cursos.alura.com.br/user/victorts1991/course/kubernetes-pods-services-configmap/certificate)
+
+[Certificate Link](https://cursos.alura.com.br/user/victorts1991/course/kubernetes-deployments-volumes-escalabilidade/certificate)
 
 ## How to Run
 
@@ -97,3 +99,46 @@ After all Pods and Services are running, perform the following steps to test:
 5. Back in GKE, in the Services & Ingress menu, click on the IP in the Endpoints column of the svc-portal-noticias;
 6. A page will open displaying the news you previously registered;
 
+## Implementing HorizontalPodAutoscaler
+
+In the CLI of your GKE Cluster, execute the commands in sequence:
+```sh
+cd portal
+
+kubectl apply -f portal-noticias-hpa.yaml
+
+cd metric-server
+
+# Metrics server downloaded from https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+kubectl apply -f components.yaml
+```
+
+The metrics server may take a while to start collecting metrics for the HPA.
+
+By executing the command below you will be able to check the current consumption through the "TARGET" column when the metrics server starts working.
+```sh
+kubectl get hpa --watch
+```
+
+![Print](print.png)
+
+## Testing HorizontalPodAutoscaler with the K6
+
+1. Install K6 following the instructions in the link below:
+```sh
+https://k6.io/docs/get-started/installation/
+```
+
+2. Back in GKE, in the Services & Ingress menu, copy on the IP in the Endpoints column of the svc-portal-noticias;
+3. In the portal/stress-test.js, paste the copied IP into variable URL, leaving the value with http:// in front;
+4. Run the following command in GKE:
+```sh
+kubectl get hpa --watch
+```
+
+5. Run the command below in another CLI to see the HPA running
+```sh
+cd portal
+
+k6 run stress-test.js
+``` 
